@@ -1,4 +1,4 @@
-prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7){
+prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7, alpha = 0.05){
   # Calculamos la probabilidad asociada a cada clase.
   pi <- c(); teta <- b - a
   for(i in 0:n){
@@ -50,8 +50,19 @@ prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7){
   
   temp <- data.frame(xi, pi, Foi, Fei, X2c)
   
-  knitr::kable(x = temp, digits = 3, align = 'c')
+  # knitr::kable(x = temp, digits = 3, align = 'c')
+  # 
+  # rpta <- ifelse(test = sum(X2c) < qchisq(p = alpha, df = 3, lower.tail = F),
+  #                "Los números generados son independientes",
+  #                "Los números generados no son independientes")
+  
+  return(list(tbl = knitr::kable(x = temp, digits = 3, align = 'c'),
+              rpta = ifelse(test = sum(X2c) < qchisq(p = alpha, df = 3, lower.tail = F),
+                            "Los números generados son independientes",
+                            "Los números generados no son independientes")))
   
 }
 
 prueba.distancia(x = datos.1)
+
+knitr::kable
