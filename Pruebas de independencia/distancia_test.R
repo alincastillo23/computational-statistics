@@ -1,3 +1,4 @@
+
 prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7, alpha = 0.05){
   # Calculamos la probabilidad asociada a cada clase.
   pi <- c(); teta <- b - a
@@ -33,10 +34,21 @@ prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7, alpha = 0.05){
       Foi[k] <- sum(resp >= xi[k])
     }
   }
-  
-  # Perzonalizamos para presentar.
   Fei <- pi*sum(Foi)
   
+  # Validar si la frecuencia esperada es menor a 5.
+  l <- 1
+  while(l <= length(Fei)){
+    if(Fei[l] < 5){
+      Fei[l + 1] <- Fei[l] + Fei[l + 1]
+      Fei <- Fei[-l]
+      l <- l
+    }else{
+      l <- l + 1
+    }
+  }
+  
+  # Perzonalizamos para presentar.
   X2c <- ((Foi - Fei)**2)/Fei
   X2c <- c(X2c, sum(X2c))
   
