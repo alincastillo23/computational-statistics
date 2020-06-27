@@ -85,7 +85,7 @@ prueba.distancia <- function(x, n = 3, a = 0.3, b = 0.7, alpha = 0.05){
   temp <- data.frame(xi, pi, Foi, Fei, X2c)
   
   return(list(tbl = knitr::kable(x = temp, digits = 3, align = 'c'),
-              rpta = ifelse(test = sum(X2c) < qchisq(p = alpha, df = 3, lower.tail = F),
+              rpta = ifelse(test = X2c[length(X2c)] < qchisq(p = alpha, df = 3, lower.tail = F),
                             "Los números generados son independientes",
                             "Los números generados no son independientes")))
   
